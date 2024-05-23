@@ -2,22 +2,36 @@ import { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signupStart, signupSuceess, signupFailure } from '../app/auth/userSlice';
+import { signUpStart, signUpSuccess, signUpFailure } from '../app/auth/userSlice';
+import { TextRotateVerticalTwoTone } from '@mui/icons-material';
 
 export default function SignUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const { loading, error } = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.auth);
+    const dispatch = useDispatch()
+
+
     
 
     function handleSignUp() {
-        console.log(name, email, password)
+        dispatch(signUpStart({ name, email, password }))
+        try {
+            dispatch(signUpSuccess({ name, email, password }))
+        } catch (error) {
+            dispatch(signUpFailure(error))
+        }
+        
     }
 
     function handleSubmit(e) { 
         e.preventDefault()
-        console.log(name, email, password)
+        handleSignUp();
+
+        
     }
 
 
