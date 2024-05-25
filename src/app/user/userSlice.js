@@ -1,27 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    isLoggedIn: false,
-    user: null,
+    currentUser: null,
     error: null,
     loading: false,
+    allUsers: [],
 };
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
-        signUpStart: (state) => {
+        signupStart: (state) => {
             state.loading = true;
             state.error = null;
         },
-        signUpSuccess: (state, action) => {
+        signupSuccess: (state, action) => {
             state.loading = false;
-            state.isLoggedIn = true;
-            state.user = action.payload;
+            state.allUsers.push(action.payload);
             state.error = null;
         },
-        signUpFailure: (state, action) => {
+        signupFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -31,20 +30,18 @@ export const authSlice = createSlice({
         },
         signinSuccess: (state, action) => {
             state.loading = false;
-            state.isLoggedIn = true;
-            state.user = action.payload;
+            state.currentUser = action.payload;
             state.error = null;
         },
         signinFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        logout: (state) => {
-            state.isLoggedIn = false;
-            state.user = null;
+        signout: (state) => {
+            state.currentUser = null;
         },
     },
 });
 
-export const { signUpStart, signUpSuccess, signUpFailure, signinStart, signinSuccess, signinFailure, logout } = authSlice.actions;
-export default authSlice.reducer;
+export const { signupStart, signupSuccess, signupFailure, signinStart, signinSuccess, signinFailure, signout } = userSlice.actions;
+export default userSlice.reducer;

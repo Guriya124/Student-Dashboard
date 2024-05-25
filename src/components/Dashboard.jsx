@@ -20,7 +20,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SchoolIcon from '@mui/icons-material/School';
 import { Link } from 'react-router-dom';
-// import  PlayCircleIcon  from '@mui/icons-material';
+
+// import { School } from 'lucide-react';
 import PropTypes from 'prop-types';
 // Redux 
 
@@ -172,7 +173,33 @@ export default function MiniDrawer({ children }) {
                             </ListItemButton>
                         </ListItem>
                     </Link>
-                    <Link to="/students">
+                    {/* Add student */}
+                    <Link to="/add-student">
+                        <ListItem disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                    color: 'white',
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                        color: 'white',
+                                    }}
+                                >
+                                    <SchoolIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Add Student" sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                    {/* Students */}
+                    <Link to="/student">
                         <ListItem className='' disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -190,13 +217,15 @@ export default function MiniDrawer({ children }) {
                                         color: 'white',
                                     }}
                                 >
-                                    {/* <ListIcon /> */}
+                                    <SchoolIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Students" sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary="All Students" sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     </Link>
-                    <Link to="/courses">
+
+                    {/* Course */}
+                    {/* <Link to="/courses">
                         <ListItem disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -219,8 +248,8 @@ export default function MiniDrawer({ children }) {
                                 <ListItemText primary="Courses" sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
-                    </Link>
-                    
+                    </Link> */}
+
 
                 </List>
 
