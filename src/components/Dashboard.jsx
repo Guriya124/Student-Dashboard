@@ -130,7 +130,8 @@ export default function MiniDrawer({ children }) {
                         <MenuIcon sx={{ color: 'white' }} />
                     </IconButton>
                     <Typography className='text-white' variant="h6" noWrap component="div">
-                        {/* {user.bussinessName} */} Student Dashboard
+                       Admin  {user.name}
+                        {/* Student Dashboard */}
                     </Typography>
                     <div className='flex ms-auto'>
 
@@ -250,8 +251,6 @@ export default function MiniDrawer({ children }) {
                             </ListItemButton>
                         </ListItem>
                     </Link> */}
-
-
                 </List>
 
 
