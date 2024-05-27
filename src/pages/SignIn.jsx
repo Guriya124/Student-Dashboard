@@ -21,7 +21,7 @@ export default function SignIn() {
             const user = allUsers.find(user => user.email === email && user.password === password);
             if (user) {
                 dispatch(signinSuccess(user));
-                navigate('/profile');
+                navigate('/');
             } else {
                 dispatch(signinFailure('Invalid email or password'));
                 console.log('Invalid email or password');

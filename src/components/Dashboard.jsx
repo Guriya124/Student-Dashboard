@@ -20,8 +20,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SchoolIcon from '@mui/icons-material/School';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-// import { School } from 'lucide-react';
+
 import PropTypes from 'prop-types';
 // Redux 
 
@@ -99,7 +100,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({ children }) {
-    // const user = useSelector(state => state.user.currentUser);
+    const user = useSelector(state => state.user.currentUser);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -139,8 +140,8 @@ export default function MiniDrawer({ children }) {
             <Drawer className='bg-gradient-to-r from-black to-[#130F40] ' variant="permanent" open={open}>
                 <DrawerHeader className='bg-gradient-to-r from-black to-[#130F40]'>
                     <div className="mx-auto">
-                        {/* <span className='text-white text-lg font-semibold'>Hello {user.name} </span> */}
-                        <span className='text-white text-lg font-semibold'>  Dashboard</span>
+                        <span className='text-white text-lg font-semibold'>Hello {user.name} </span>
+                        
                     </div>
                     <IconButton onClick={handleDrawerClose} sx={{ color: 'white' }} >
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -149,7 +150,7 @@ export default function MiniDrawer({ children }) {
                 <Divider />
                 {/* Dasboard Menu Icon with Name */}
                 <List className='bg-gradient-to-r from-black to-[#130F40]'>
-                    <Link to="/dashboard">
+                    <Link to="/">
                         <ListItem disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{

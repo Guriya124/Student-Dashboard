@@ -1,14 +1,20 @@
 import DashBoardCard from '../components/DashboardCard'
 import Dashboard from '../components/Dashboard'
 import { Link } from 'react-router-dom'
-
+import { useSelector } from 'react-redux'
 export default function Home() {
+  const user = useSelector(state => state.user.currentUser)
+  const student = useSelector(state => state.student.students)
+  let matchingStudent = []
+  if (user) {
+    matchingStudent = student.filter(item => item && item.userId === user.email);
+  }
   return (
     <>
       <div>
         <Dashboard >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <DashBoardCard title="Total Students" value={1} icon="/images/student.png" dynamicColor="bg-gradient-to-br from-blue-500 to-red-700" />
+            <DashBoardCard title="Total Students" value={matchingStudent.length} dynamicColor="bg-gradient-to-br from-blue-500 to-red-700" />
           </div>
           <div className='mt-9'>
             <Link to="/add-student">

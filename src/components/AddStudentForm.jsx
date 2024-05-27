@@ -5,11 +5,13 @@ import Paper from '@mui/material/Paper';
 import { useDispatch } from 'react-redux';
 import { addStudent } from '../app/student/studentSlice'
 import { Select, MenuItem } from '@mui/material';
-
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
 
 
 export default function AddStudentForm() {
-
+    const user = useSelector(state => state.user.currentUser)
+    const userId = user.email
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -63,20 +65,38 @@ export default function AddStudentForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newStudent = {
-            name,
-            email,
-            phone,
-            address,
-            city,
-            landmark,
-            course,
-            startDate,
-            completedDate,
-            semester,
-        };
-        dispatch(addStudent(newStudent));
-        console.log(newStudent);
+        try {
+            const id = uuidv4();
+            const newStudent = {
+                id,
+                userId,
+                name,
+                email,
+                phone,
+                address,
+                city,
+                landmark,
+                course,
+                startDate,
+                completedDate,
+                semester,
+            };
+
+            dispatch(addStudent(newStudent));
+            setName("")
+            setEmail("")
+            setPhone("")
+            setAddress("")
+            setCity("")
+            setLandmark("")
+            setCourse("")
+            setStartDate("")
+            setCompletedDate("")
+            setSemester("")
+            console.log(newStudent);
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     return (
@@ -87,43 +107,43 @@ export default function AddStudentForm() {
             <form onSubmit={handleSubmit} className='w-full'>
                 <div className="flex flex-wrap gap-4  justify-center">
                     <div className="w-[450px]">
-
+                        <label>Name</label>
                         <TextField id="name" name="name" value={name} onChange={handleInputChange} label="Name" variant="outlined" fullWidth required />
                     </div>
                     <div className="w-[450px] ">
-
+                        <label>Email</label>
                         <TextField id="email" name="email" value={email} onChange={handleInputChange} label="Email" variant="outlined" fullWidth required />
                     </div>
                     <div className=" w-[450px]">
-
+                        <label>Phone</label>
                         <TextField id="phone" name="phone" value={phone} onChange={handleInputChange} type="number" label="Phone Number" variant="outlined" fullWidth required />
                     </div>
                     <div className=" w-[450px]">
-
+                        <label>Address</label>
                         <TextField id="address" name="address" value={address} onChange={handleInputChange} label="Address" variant="outlined" fullWidth required />
                     </div>
                     <div className="w-[450px] ">
-
+                        <label>City</label>
                         <TextField id="city" name="city" value={city} onChange={handleInputChange} label="City" variant="outlined" fullWidth />
                     </div>
                     <div className="w-[450px]">
-
+                        <label>Landmark</label>
                         <TextField id="landmark" name="landmark" value={landmark} onChange={handleInputChange} label="Landmark" variant="outlined" fullWidth />
                     </div>
                     <div className="w-[450px] ">
-
+                        <label>Course</label>
                         <TextField id="course" name="course" value={course} onChange={handleInputChange} label="Course" variant="outlined" fullWidth />
                     </div>
                     <div className="w-[450px]">
-
+                        <label>Start Date</label>
                         <TextField id="startDate" name="startDate" value={startDate} onChange={handleInputChange} type="date" variant="outlined" fullWidth />
                     </div>
                     <div className="w-[450px]">
-
+                        <label>Complete Date</label>
                         <TextField id="completedDate" name="completedDate" value={completedDate} onChange={handleInputChange} type="date" variant="outlined" fullWidth />
                     </div>
                     <div className="w-[450px]">
-                        {/* <label htmlFor="semester" className="text-black">Semester</label> */}
+                        <label htmlFor="semester" className="text-black">Semester</label>
                         <Select
                             id="semester"
                             name="semester"
@@ -133,6 +153,7 @@ export default function AddStudentForm() {
                             variant="outlined"
                             fullWidth
                         >
+
                             <MenuItem value={1}>1 </MenuItem>
                             <MenuItem value={2}>2 </MenuItem>
                             <MenuItem value={3}>3</MenuItem>
